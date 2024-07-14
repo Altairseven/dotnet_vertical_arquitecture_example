@@ -21,13 +21,12 @@ public class AddClientHandler : ICommandHandler<AddClientCommand, AddClientRespo
 
         await _featuresDbContext.SaveChangesAsync();
 
-        return new Result<AddClientResponse>(
+        return Result.Success(
             new AddClientResponse(
                 cli.Id,
                 cli.FirstName,
-                cli.LastName),
-            true,
-            Error.None
+                cli.LastName
+            )
         );
     }
 }

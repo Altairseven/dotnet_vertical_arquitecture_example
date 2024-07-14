@@ -1,6 +1,7 @@
 ﻿using Api.Common.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace Api.Middleware;
 
 public class ExceptionHandlingMiddleware
@@ -21,6 +22,22 @@ public class ExceptionHandlingMiddleware
         try
         {
             await _next(context);
+        }
+        catch (HttpRequestException exception)
+        {
+            _logger.LogError(exception, "API Exception occurred: {Message}", exception.Message);
+
+            var problemDetails = new ProblemDetails
+            {
+                Status = (int?)exception.StatusCode ?? 500,
+                Type = "ApiException",
+                Title = "API Exception",
+                Detail = exception.Message,
+            };
+
+            context.Response.StatusCode = (int?)exception.StatusCode ?? 500;
+
+            await context.Response.WriteAsJsonAsync(problemDetails);
         }
         catch (Exception exception)
         {

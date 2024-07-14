@@ -45,8 +45,7 @@ internal static class ServiceCollectionExtensions
             options.UseInMemoryDatabase("VerticalSliceDemoDb")
         );
         services.AddRefitClient<IClientesApi>()
-            .ConfigureHttpClient(
-            c => c.BaseAddress = new Uri("http://api-address.com")
+            .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://api-address.com")
         );
 
         return services;

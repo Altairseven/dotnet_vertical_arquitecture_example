@@ -17,6 +17,7 @@ public static class ApplicationExtensions
         {
             c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1");
             c.SwaggerEndpoint("/swagger/v2/swagger.json", "API v2");
+            c.EnableTryItOutByDefault();
 
         });
 

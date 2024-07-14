@@ -9,7 +9,7 @@ namespace Api.Behaviors;
 
 public class ValidationBehavior<TRequest, TResponse>
     : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IBaseCommand
+    where TRequest : IRequest
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 

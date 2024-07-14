@@ -4,7 +4,7 @@ namespace Api.Http.ClientesApi;
 
 public interface IClientesApi
 {
-    [Post("api/clientes")]
+    [Post("/api/clientes")]
     Task<Guid> PostCliente(PostClienteRequest request);
 }
 

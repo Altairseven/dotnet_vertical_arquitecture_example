@@ -4,14 +4,14 @@ namespace Api.Domain;
 
 public class Client : Entity<int>
 {
+    private Client() { }
     private Client(int clientId, string firstName, string lastName)
     {
-        ClientId = clientId;
+        Id = clientId;
         FirstName = firstName;
         LastName = lastName;
     }
 
-    public int ClientId { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
 
