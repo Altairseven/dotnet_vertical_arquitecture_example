@@ -1,9 +1,6 @@
-﻿using Asp.Versioning.Builder;
-using Asp.Versioning;
-using Carter;
+﻿using Carter;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using static Api.Middleware.ExceptionHandlingMiddleware;
+using Api.Common.Abstractions;
 
 namespace Api.Features.Clients.V2.CreateClient;
 

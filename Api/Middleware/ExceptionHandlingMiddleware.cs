@@ -1,4 +1,5 @@
-﻿using Api.Common.Exceptions;
+﻿using Api.Common.Abstractions;
+using Api.Common.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -83,10 +84,5 @@ public class ExceptionHandlingMiddleware
         };
     }
 
-    internal record ExceptionDetails(
-        int Status,
-        string Type,
-        string Title,
-        string Detail,
-        IEnumerable<object>? Errors);
+
 }

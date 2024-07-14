@@ -3,7 +3,7 @@ using Asp.Versioning;
 using Carter;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using static Api.Middleware.ExceptionHandlingMiddleware;
+using Api.Common.Abstractions;
 
 namespace Api.Features.Clients.V1.CreateClient;
 

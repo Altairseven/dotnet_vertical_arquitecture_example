@@ -9,6 +9,29 @@ using static Api.Middleware.ExceptionHandlingMiddleware;
 
 namespace Api.Features.Clients.V1.GetAllClients;
 
+public class Endpoint() : ICarterModule
+{
+    public void AddRoutes(IEndpointRouteBuilder app)
+    {
+        app.MapGet("/v{version:apiVersion}/clientes", async (ISender sender) =>
+        {
+            var result = await sender.Send(new GetAllClients.Query());
+            if (result.IsFailure)
+            {
+                return Results.BadRequest(result.Error);
+            }
+            return Results.Ok(result.Value);
+
+        }).WithTags("Clientes")
+        .WithDescription("Trae todos los clientes")
+        .Produces<GetAllClients.Response>(StatusCodes.Status200OK)
+        .Produces<ExceptionDetails>(StatusCodes.Status400BadRequest)
+        .Produces<ExceptionDetails>(StatusCodes.Status500InternalServerError)
+        .MapToApiVersion(1)
+        .WithOpenApi();
+    }
+}
+
 public static class GetAllClients
 {
     public record Query() : IQuery<Response>;
@@ -41,26 +64,4 @@ public static class GetAllClients
         }
     }
 
-    public class Endpoint() : ICarterModule
-    {
-        public void AddRoutes(IEndpointRouteBuilder app)
-        {
-            app.MapGet("/v{version:apiVersion}/clientes", async (ISender sender) =>
-            {
-                var result = await sender.Send(new Query());
-                if (result.IsFailure)
-                {
-                    return Results.BadRequest(result.Error);
-                }
-                return Results.Ok(result.Value);
-
-            }).WithTags("Clientes")
-            .WithDescription("Trae todos los clientes")
-            .Produces<Response>(StatusCodes.Status200OK)
-            .Produces<ExceptionDetails>(StatusCodes.Status400BadRequest)
-            .Produces<ExceptionDetails>(StatusCodes.Status500InternalServerError)
-            .MapToApiVersion(1)
-            .WithOpenApi();
-        }
-    }
 }
